@@ -14,9 +14,11 @@ public class LockScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
         makeFullScreen();
+        super.onCreate(savedInstanceState);
+
+
         startService(new Intent(this, LockService.class));
 
         setContentView(R.layout.activity_lockscreen);
@@ -24,8 +26,8 @@ public class LockScreenActivity extends AppCompatActivity {
     }
 
     public void makeFullScreen() {
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|WindowManager.LayoutParams.FLAG_FULLSCREEN|
+                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 
         int visibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
         if (Build.VERSION.SDK_INT < 19) { //View.SYSTEM_UI_FLAG_IMMERSIVE is only on API 19+
